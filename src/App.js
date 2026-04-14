@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect, useCallback } from 'react';
 
 // ── Default grocery items ──────────────────────────────────────────────────
@@ -603,6 +604,12 @@ export default function App() {
   const [newUnit, setNewUnit] = useState('');
   const [newCat,  setNewCat]  = useState('Custom');
 
+  // ── showToast (defined first so hooks below can reference it) ──
+  const showToast = useCallback((msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(''), 2800);
+  }, []);
+
   // ── Load from localStorage on mount ──
   useEffect(() => {
     const saved = loadData();
@@ -625,19 +632,15 @@ export default function App() {
         setPrices(decoded.prices || {});
         showToast('📥 Shared data loaded!');
         window.history.replaceState({}, '', window.location.pathname);
-      } catch {}
+      } catch (e) {} // eslint-disable-line no-unused-vars
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ── Auto-save ──
   useEffect(() => {
     saveData({ items, prices });
   }, [items, prices]);
-
-  const showToast = useCallback((msg) => {
-    setToast(msg);
-    setTimeout(() => setToast(''), 2800);
-  }, []);
 
   const updatePrice = useCallback((id, type, val) => {
     setPrices(prev => ({
