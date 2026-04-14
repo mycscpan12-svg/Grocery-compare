@@ -1,9 +1,0 @@
-{
-  "short_name": "Grocery Compare",
-  "name": "Grocery Price Comparator",
-  "icons": [],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#14532d",
-  "background_color": "#f0fdf4"
-}
